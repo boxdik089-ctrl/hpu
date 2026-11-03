@@ -5,24 +5,20 @@ export function Hero() {
   return (
     <section
       id="hero"
-      className="relative bg-pink-100 py-20 lg:py-32 px-6 flex flex-col items-center justify-center text-center overflow-hidden"
+      className="bg-pink-100 py-16 sm:py-24 lg:py-28 px-4 sm:px-6 flex flex-col items-center justify-center text-center"
     >
-      {/* Decorative Background Circles */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-white rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob" />
-      <div className="absolute top-0 right-0 w-64 h-64 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-50 animate-blob animation-delay-2000" />
-
-      <div className="relative z-10 max-w-3xl mx-auto">
-        <span className="inline-block py-1.5 px-4 rounded-full bg-white text-pink-600 font-semibold text-sm mb-6 shadow-sm border border-pink-200">
+      <div className="max-w-3xl mx-auto">
+        <span className="inline-block py-1 px-4 rounded-full bg-white text-pink-600 font-semibold text-xs sm:text-sm mb-5 shadow-xs border border-pink-200">
           Herbal Pelangsing Ultimate
         </span>
 
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 text-pink-700">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-5 text-pink-700">
           Menurunkan berat badan <br />
           <span className="text-pink-500">1-5 kg dalam 1 botol</span> <br />
           TANPA OLAHRAGA.
         </h1>
 
-        <p className="text-lg md:text-xl text-pink-800 mb-8 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-base sm:text-lg md:text-xl text-pink-800 mb-8 max-w-2xl mx-auto leading-relaxed">
           {hpuConfig.description}
         </p>
 
@@ -30,21 +26,20 @@ export function Hero() {
           href={hpuConfig.contact.whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block bg-pink-500 hover:bg-pink-600 text-white font-bold py-3.5 sm:py-4 px-9 sm:px-10 rounded-full shadow-lg shadow-pink-500/30 transition-all transform hover:-translate-y-0.5"
+          className="inline-block bg-pink-500 hover:bg-pink-600 text-white font-bold py-3.5 px-9 rounded-full shadow-md shadow-pink-500/20 transition-colors"
         >
           Pesan Sekarang
         </a>
 
         {/* Quick Trust Marks */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs text-pink-700/80 font-medium">
-          <span className="flex items-center gap-1.5">✓ BPOM TR253007261</span>
-          <span className="hidden sm:inline">•</span>
-          <span className="flex items-center gap-1.5">✓ 100% Halal MUI</span>
-          <span className="hidden sm:inline">•</span>
-          <span className="flex items-center gap-1.5">✓ Isi 30 Kapsul</span>
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm text-pink-800 font-medium">
+          <span>✓ POM TR253007261</span>
+          <span>•</span>
+          <span>✓ 100% Halal MUI</span>
+          <span>•</span>
+          <span>✓ Isi 30 Kapsul</span>
         </div>
       </div>
     </section>
   );
 }
-
