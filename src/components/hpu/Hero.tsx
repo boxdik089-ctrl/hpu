@@ -30,10 +30,19 @@ export function Hero() {
           href={hpuConfig.contact.whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 px-10 rounded-full shadow-lg shadow-pink-500/50 transition-all transform hover:-translate-y-1 hover:shadow-xl hover:shadow-pink-500/60"
+          className="inline-block bg-pink-500 hover:bg-pink-600 text-white font-bold py-3.5 sm:py-4 px-9 sm:px-10 rounded-full shadow-lg shadow-pink-500/30 transition-all transform hover:-translate-y-0.5"
         >
           Pesan Sekarang
         </a>
+
+        {/* Quick Trust Marks */}
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-6 text-xs text-pink-700/80 font-medium">
+          <span className="flex items-center gap-1.5">✓ BPOM TR253007261</span>
+          <span className="hidden sm:inline">•</span>
+          <span className="flex items-center gap-1.5">✓ 100% Halal MUI</span>
+          <span className="hidden sm:inline">•</span>
+          <span className="flex items-center gap-1.5">✓ Isi 30 Kapsul</span>
+        </div>
       </div>
     </section>
   );

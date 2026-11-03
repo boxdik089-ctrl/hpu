@@ -24,7 +24,7 @@ const realTestimonials: RealTestimonial[] = [
     title: "Turun 14 kg (110 kg → 96 kg)",
     badge: "110 kg ➔ 96 kg",
     highlight: "Real Terbukti",
-    description: "Perubahan nyata dari 110 kg menjadi 96 kg, tubuh jauh lebih proporsional.",
+    description: "Perubahan nyata dari 110 kg menjadi 96 kg, tubuh tampak proporsional dan langsing.",
     image: "/testimonials/testi-1.jpg",
   },
   {
@@ -80,43 +80,53 @@ export function Testimonials() {
           </p>
         </div>
 
-        {/* Compact Responsive Gallery Grid */}
+        {/* Compact Responsive Gallery Grid: 2 cols on mobile, 3 cols on tablet, 5 cols on desktop */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
           {realTestimonials.map((item) => (
             <div
               key={item.id}
-              className="bg-white rounded-2xl overflow-hidden border border-pink-200 shadow-sm hover:shadow-md transition-shadow flex flex-col group"
+              className="bg-white rounded-2xl overflow-hidden border border-pink-200 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between group"
             >
-              {/* Photo Container */}
+              {/* Photo Container with uncropped display and matching blurred background */}
               <div
-                className="relative w-full bg-pink-50 cursor-pointer overflow-hidden aspect-[4/5]"
+                className="relative w-full bg-neutral-900 cursor-pointer overflow-hidden aspect-[9/14] flex items-center justify-center"
                 onClick={() => setSelectedImage(item)}
               >
+                {/* Blurred ambient background */}
+                <Image
+                  src={item.image}
+                  alt=""
+                  fill
+                  className="object-cover blur-md opacity-25 scale-110 pointer-events-none"
+                  aria-hidden
+                />
+
+                {/* Main uncropped photo */}
                 <Image
                   src={item.image}
                   alt={item.title}
                   fill
-                  className="object-cover object-top group-hover:scale-103 transition-transform duration-300"
+                  className="object-contain relative z-10 group-hover:scale-102 transition-transform duration-300"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                 />
 
-                {/* Dark Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/15" />
+                {/* Subtle gradient at bottom */}
+                <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-black/80 to-transparent z-20 pointer-events-none" />
 
                 {/* Badge Highlight (Top Left) */}
-                <div className="absolute top-2 left-2 bg-pink-500 text-white font-bold text-[10px] px-2 py-0.5 rounded-md shadow-xs flex items-center gap-1">
+                <div className="absolute top-2 left-2 z-20 bg-pink-500 text-white font-bold text-[10px] px-2 py-0.5 rounded-md shadow flex items-center gap-1">
                   <TrendingDown className="w-3 h-3" />
                   <span>{item.highlight}</span>
                 </div>
 
                 {/* Zoom Hint Icon (Top Right) */}
-                <div className="absolute top-2 right-2 bg-white/90 text-pink-700 p-1.5 rounded-full shadow-xs opacity-90 group-hover:opacity-100 transition">
+                <div className="absolute top-2 right-2 z-20 bg-white/90 text-pink-700 p-1.5 rounded-full shadow-xs opacity-90 group-hover:opacity-100 transition">
                   <ZoomIn className="w-3.5 h-3.5" />
                 </div>
 
-                {/* Bottom Overlay Text */}
-                <div className="absolute bottom-2 left-2 right-2">
-                  <span className="inline-block bg-black/60 backdrop-blur-xs text-pink-200 text-[10px] font-semibold px-2 py-0.5 rounded border border-pink-300/30">
+                {/* Bottom Badge */}
+                <div className="absolute bottom-2 left-2 right-2 z-20">
+                  <span className="inline-block bg-black/70 backdrop-blur-xs text-pink-200 text-[10px] font-semibold px-2 py-0.5 rounded border border-pink-300/30">
                     {item.badge}
                   </span>
                 </div>
@@ -153,38 +163,40 @@ export function Testimonials() {
       {/* Lightbox / Photo Modal Popup */}
       {selectedImage && (
         <div
-          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-xs flex items-center justify-center p-4"
+          className="fixed inset-0 z-50 bg-black/85 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4"
           onClick={() => setSelectedImage(null)}
         >
           <div
-            className="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-y-auto shadow-2xl relative"
+            className="bg-white rounded-2xl max-w-md w-full max-h-[92vh] flex flex-col overflow-hidden shadow-2xl relative"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
             <button
               onClick={() => setSelectedImage(null)}
-              className="absolute top-3 right-3 z-20 bg-black/70 hover:bg-black text-white p-1.5 rounded-full transition shadow-md"
+              className="absolute top-3 right-3 z-30 bg-black/70 hover:bg-black text-white p-1.5 rounded-full transition shadow-md"
               aria-label="Tutup foto"
             >
               <X className="w-4 h-4" />
             </button>
 
             {/* Modal Image Display */}
-            <div className="relative w-full h-[60vh] bg-black">
-              <Image
-                src={selectedImage.image}
-                alt={selectedImage.title}
-                fill
-                className="object-contain"
-                priority
-              />
-              <div className="absolute top-3 left-3 bg-pink-500 text-white text-[11px] font-bold px-2.5 py-1 rounded-md shadow">
+            <div className="relative w-full flex-1 min-h-[50vh] sm:min-h-[60vh] bg-neutral-950 p-2 flex items-center justify-center">
+              <div className="relative w-full h-full min-h-[420px]">
+                <Image
+                  src={selectedImage.image}
+                  alt={selectedImage.title}
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              <div className="absolute top-3 left-3 bg-pink-500 text-white text-[11px] font-bold px-2.5 py-1 rounded-md shadow z-20">
                 {selectedImage.highlight}
               </div>
             </div>
 
             {/* Modal Caption */}
-            <div className="p-4 sm:p-5 bg-white">
+            <div className="p-4 sm:p-5 bg-white border-t border-pink-100">
               <div className="mb-1.5">
                 <span className="text-[10px] font-bold text-pink-600 bg-pink-100 px-2 py-0.5 rounded">
                   {selectedImage.badge}
@@ -209,7 +221,7 @@ export function Testimonials() {
                 </a>
                 <button
                   onClick={() => setSelectedImage(null)}
-                  className="px-3 py-2 text-xs font-semibold text-pink-700 bg-pink-50 hover:bg-pink-100 rounded-full transition"
+                  className="px-3.5 py-2 text-xs font-semibold text-pink-700 bg-pink-50 hover:bg-pink-100 rounded-full transition"
                 >
                   Tutup
                 </button>
